@@ -15,9 +15,12 @@ const connectDb = async () => {
     }
 };
 const app = express();
+//*قرار بده req.body دارن رو پارس کن و در  JSON  بدنه‌ی درخواست‌های ورودی که فرمت 
+app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Server is runing');
 });
+//* روت اصلی یا پیش فرض برای مسیر احراز هویت کاربر
 app.use('/api/v1', userRoute);
 const port = process.env.PORT || 5000;
 const startServer = async () => {

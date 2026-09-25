@@ -1,1 +1,1 @@
-{"version":3,"file":"controoler.d.ts","sourceRoot":"","sources":["../src/controoler.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAEjD,eAAO,MAAM,YAAY,QAAa,OAAO,OAAK,QAAQ,kBAEzD,CAAA"}
+{"version":3,"file":"controoler.d.ts","sourceRoot":"","sources":["../src/controoler.ts"],"names":[],"mappings":"AAQA,eAAO,MAAM,YAAY,8IAmCvB,CAAA;AAGF,eAAO,MAAM,SAAS,8IAiCpB,CAAA;AAGF,eAAO,MAAM,SAAS,8IAIpB,CAAA"}
