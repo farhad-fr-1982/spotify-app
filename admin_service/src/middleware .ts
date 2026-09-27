@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import axios from "axios";
 import dotenv, { config } from 'dotenv'
+import multer from "multer";
 
 dotenv.config()
 
@@ -42,8 +43,11 @@ export const isAuth = async (req: AuthenticatedRequest, res: Response, next: Nex
     }
 };
 
-//* Multer -->  برای آپلود فایل در اکسپرس جی اس استفاده میشه
-//* (req.files or req.file) قرار میده middleware که فایل‌های ارسالی از فرم (مثل عکس، ویدیو، فایل صوتی) رو می‌گیره و در دسترس یه
+//* Multer تنظیمات
 
-//* datauri --> ک وقتی می‌خوای فایل رو به کلودینری آپلود کنی، به جای اینکه مسیر فایل روی دیسک رو بدی، این رشتهبیس شصت و چهار رو می‌دهد
-//*  فایل عکس → پکیج دیتا یو آر آی → رشته‌ای مثل تصویر یا دیتا:
+const storage = multer.memoryStorage()
+
+const uploadFile = multer({ storage }).single('file')
+
+export default uploadFile
+

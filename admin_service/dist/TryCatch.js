@@ -1,12 +1,12 @@
+// TryCatch به صورت جنریک
 const TryCatch = (handler) => {
     return async (req, res, next) => {
         try {
             await handler(req, res, next);
         }
         catch (error) {
-            res.status(500).json({
-                message: error.message,
-            });
+            const message = error instanceof Error ? error.message : "Unknown error";
+            res.status(500).json({ message });
         }
     };
 };

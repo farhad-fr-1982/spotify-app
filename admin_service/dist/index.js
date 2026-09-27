@@ -2,6 +2,14 @@ import 'dotenv/config';
 import express from 'express';
 import { sql } from './config/db.js';
 import adminRoutes from './route.js';
+import dotenv from 'dotenv';
+import { v2 as cloudinary } from 'cloudinary';
+dotenv.config();
+cloudinary.config({
+    cloud_name: process.env.Cloud_Name,
+    api_key: process.env.Cloud_Api_Key,
+    api_secret: process.env.Cloud_Api_Secret,
+});
 const app = express();
 app.use(express.json());
 async function initDB() {

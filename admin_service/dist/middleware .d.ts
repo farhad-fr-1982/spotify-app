@@ -11,5 +11,6 @@ export interface AuthenticatedRequest extends Request {
     user?: IUser | null;
 }
 export declare const isAuth: (req: AuthenticatedRequest, res: Response, next: NextFunction) => Promise<void>;
-export {};
+declare const uploadFile: import("express").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
+export default uploadFile;
 //# sourceMappingURL=middleware%20.d.ts.map

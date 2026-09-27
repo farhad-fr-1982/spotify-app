@@ -1,7 +1,17 @@
-import 'dotenv/config'   
+import 'dotenv/config'
 import express from 'express'
 import { sql } from './config/db.js'
 import adminRoutes from './route.js'
+import dotenv from 'dotenv'
+import { v2 as cloudinary } from 'cloudinary'  
+
+dotenv.config()
+
+cloudinary.config({
+  cloud_name: process.env.Cloud_Name as string,
+  api_key: process.env.Cloud_Api_Key as string,
+  api_secret: process.env.Cloud_Api_Secret as string,
+})
 
 const app = express()
 app.use(express.json())
@@ -38,13 +48,13 @@ async function initDB() {
 }
 
 //* مسیر روت اصلی بخش سرویس ادمین
-app.use('/api/v1',adminRoutes)
+app.use('/api/v1', adminRoutes)
 
 const port = process.env.PORT || 7000
 
 const startServer = async () => {
-  await initDB();                            
-  app.listen(port, () => {                    
+  await initDB();
+  app.listen(port, () => {
     console.log(`✅ Server started on http://localhost:${port}`)
   })
 }
