@@ -15,8 +15,10 @@
   "type": "module",
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
+    "@types/redis": "^4.0.10",
     "dotenv": "^18.0.4",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "redis": "^6.2.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
