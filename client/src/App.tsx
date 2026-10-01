@@ -1,12 +1,16 @@
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
 
 function App() {
 
   return (
     <>
-     <div className='text-2xl text-green-600 font-semibold text-center mt-4'>
-      Spotify
-     </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
