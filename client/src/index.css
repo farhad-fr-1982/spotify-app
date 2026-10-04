@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'IRANSansWeb';
   src: url('/fonts/IRANSansWeb.woff') format('woff'),
-       url('/fonts/IRANSansWeb.ttf') format('truetype');
+    url('/fonts/IRANSansWeb.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -15,4 +15,12 @@
     color: white;
     font-family: 'IRANSansWeb', system-ui, sans-serif;
   }
+}
+
+.auth-input {
+  @apply w-full p-3 bg-gray-800 rounded-md border border-gray-700 focus:outline-none focus:border-gray-500;
+}
+
+.auth-btn {
+  @apply w-full bg-green-500 hover:bg-green-400 text-black font-semibold p-3 rounded-full;
 }

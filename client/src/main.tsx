@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { SongProvider } from './context/SongContext.tsx'
+import { UserProvider } from './context/UserContex.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <SongProvider>
-      <App />
-    </SongProvider>
+    <UserProvider>
+      <SongProvider>
+        <App />
+      </SongProvider>
+    </UserProvider>
   </StrictMode>,
 )

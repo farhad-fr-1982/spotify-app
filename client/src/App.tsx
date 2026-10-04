@@ -1,18 +1,22 @@
-import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Loading from "./components/Loading";
+import { useUserData } from "./context/UserContex";
 
-function App() {
+const App = () => {
+  const { isAuth, loading } = useUserData()
 
   return (
     <>
-      <BrowserRouter>
+      {loading ? <Loading /> : <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={isAuth ? <Home /> : <Login />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter>}
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

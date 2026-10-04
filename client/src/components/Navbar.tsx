@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import { useUserData } from '../context/UserContex'
 
 const chipBase =
   'shrink-0 bg-white text-black px-3 py-1 md:px-4 text-sm md:text-base rounded-2xl cursor-pointer'
 
 const Navbar = () => {
   const navigate = useNavigate()
+
+  const { isAuth,logout  } = useUserData()
 
   return (
     <>
@@ -15,7 +18,7 @@ const Navbar = () => {
             alt='قبلی' className='w-7 md:w-8 bg-black p-2 rounded-2xl cursor-pointer' onClick={() => navigate(-1)} />
           <img src='/left_arrow.png'
             alt='بعدی'
-            className='w-7 md:w-8 bg-black p-2 rounded-2xl cursor-pointer' onClick={() => navigate(1)}/>
+            className='w-7 md:w-8 bg-black p-2 rounded-2xl cursor-pointer' onClick={() => navigate(1)} />
         </div>
 
         <div className='flex items-center gap-2 md:gap-4'>
@@ -25,10 +28,19 @@ const Navbar = () => {
           <p className='px-4 py-1 cursor-pointer bg-white text-black text-[15px] rounded-full hidden md:block'>
             نصب برنامه
           </p>
-          {/* دکمه‌ی خروج در موبایل هم دیده می‌شود */}
-          <p className='px-3 md:px-4 py-1 cursor-pointer bg-white text-red-600 text-sm md:text-[15px] rounded-full'>
-            خروج
-          </p>
+          {isAuth ? (
+            <p
+              onClick={logout}
+              className="px-4 py-1 cursor-pointer bg-white text-red-600 text-[15px] rounded-full">
+              خروج
+            </p>
+          ) : (
+            <p
+              onClick={() => navigate("/login")}
+              className="px-4 py-1 cursor-pointer bg-white text-black text-[15px] rounded-full">
+              ورود
+            </p>
+          )}
         </div>
       </div>
       {/* چیپ‌ها: در موبایل افقی و قابل اسکرول */}
