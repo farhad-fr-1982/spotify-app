@@ -37,7 +37,7 @@ interface SongContextType {
 const SongContext = createContext<SongContextType | undefined>(undefined);
 
 interface SongProviderProps {
-    children: ReactNode;
+    children: ReactNode
 }
 
 export const SongProvider: React.FC<SongProviderProps> = ({ children }) => {
