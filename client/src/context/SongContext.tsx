@@ -61,7 +61,7 @@ export const SongProvider: React.FC<SongProviderProps> = ({ children }) => {
         }
     }, []);
 
-    const [song, setSong] = useState<Song | null>(null);
+    const [song, setSong] = useState<Song | null>(null)
 
     const fetchSingleSong = useCallback(async () => {
 
