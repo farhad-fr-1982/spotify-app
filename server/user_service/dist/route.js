@@ -1,5 +1,5 @@
 import express from "express";
-import { loginUser, myProfile, registerUser } from "./controoler.js";
+import { addToPlaylist, loginUser, myProfile, registerUser } from "./controoler.js";
 import isAuth from "./middleware .js";
 const router = express.Router();
 //*روت فرعی برای ثبت نام کاربر
@@ -8,5 +8,7 @@ router.post('/user/register', registerUser);
 router.post('/user/login', loginUser);
 //*روت فرعی برای پنل کاربر
 router.get('/user/me', isAuth, myProfile);
+//*روت فرعی لیست پخش
+router.post('/song/:id', isAuth, addToPlaylist);
 export default router;
 //# sourceMappingURL=route.js.map

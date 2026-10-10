@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useUserData } from '../context/UserContex'
 
 const Login = () => {
@@ -38,6 +38,10 @@ const Login = () => {
                             {btnLoading ? 'لطفا صبر کنید...' : 'ورود به سیستم'}
                         </button>
                     </form>
+
+                    <div className="mt-6 text-center">
+                        <Link to="/register" className="text-gray-400 hover:text-gray-300">ثبت نام</Link>
+                    </div>
                 </div>
             </div>
         </>

@@ -1,5 +1,6 @@
 import { createContext, type ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useUserData } from "./UserContex";
 
 const server = "http://localhost:8000";
 
@@ -32,6 +33,9 @@ interface SongContextType {
     fetchSingleSong: () => Promise<void>;
     nextSong: () => void;
     prevSong: () => void;
+    albumSong: Song[];
+    albumData: Album | null;
+    fetchAlbumsongs: (id: string) => Promise<void>
 }
 
 const SongContext = createContext<SongContextType | undefined>(undefined);
@@ -41,6 +45,7 @@ interface SongProviderProps {
 }
 
 export const SongProvider: React.FC<SongProviderProps> = ({ children }) => {
+
     const [songs, setSongs] = useState<Song[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedSong, setSelectedSong] = useState<string | null>(null);
@@ -119,6 +124,27 @@ export const SongProvider: React.FC<SongProviderProps> = ({ children }) => {
 
     }, [index, songs]);
 
+
+    const [albumSong, setAlbumSong] = useState<Song[]>([]);
+    const [albumData, setAlbumData] = useState<Album | null>(null);
+
+    const fetchAlbumsongs = useCallback(async (id: string) => {
+        setLoading(true);
+
+        try {
+            const { data } = await axios.get<{ songs: Song[]; album: Album }>(
+                `${server}/api/v1/album/${id}` 
+            );
+
+            setAlbumData(data.album);
+            setAlbumSong(data.songs);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
     useEffect(() => {
         fetchSongs();
         fetchAlbums()
@@ -138,7 +164,10 @@ export const SongProvider: React.FC<SongProviderProps> = ({ children }) => {
                 song,
                 nextSong,
                 prevSong,
-                fetchSingleSong
+                fetchSingleSong,
+                albumData,
+                albumSong,
+                fetchAlbumsongs
             }}
         >
             {children}

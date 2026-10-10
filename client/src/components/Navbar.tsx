@@ -29,9 +29,7 @@ const Navbar = () => {
             نصب برنامه
           </p>
           {isAuth ? (
-            <p
-              onClick={logout}
-              className="px-4 py-1 cursor-pointer bg-white text-red-600 text-[15px] rounded-full">
+            <p onClick={logout} className="px-4 py-1 cursor-pointer bg-white text-red-600 text-[15px] rounded-full">
               خروج
             </p>
           ) : (

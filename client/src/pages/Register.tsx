@@ -1,0 +1,58 @@
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useUserData } from '../context/UserContex'
+
+const Register = () => {
+   const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+  const { registerUser, btnLoading } = useUserData()
+
+  async function submitHandler(e: any) {
+    e.preventDefault()
+    registerUser(name, email, password, navigate)
+  }
+  return (
+    <>
+      <div className="flex items-center justify-center h-screen max-h-screen">
+        <div className="bg-black text-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          <h2 className="text-3xl font-semibold text-center mb-8">ثبت نام در سایت</h2>
+
+          <form className="mt-8" onSubmit={submitHandler}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">نام :</label>
+
+              <input type="text" placeholder="نام" value={name} className="auth-input" required
+                onChange={(e) => setName(e.target.value)} />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">ایمیل یا نام کاربری:</label>
+
+              <input type="email" placeholder="ایمیل یا نام کاربری" className="auth-input" required value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+            </div>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">کلمه عبور:</label>
+
+              <input type="password" placeholder="کلمه عبور" className="auth-input" required
+                onChange={(e) => setPassword(e.target.value)} />
+            </div>
+
+            <button disabled={btnLoading} className='auth-btn'>
+              {btnLoading ? 'لطفا صبر کنید...' : 'ثبت نام در سیستم'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <Link to="/register" className="text-gray-400 hover:text-gray-300">ثبت نام</Link>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default Register

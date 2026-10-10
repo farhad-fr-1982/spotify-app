@@ -22,6 +22,16 @@ interface UserContextType {
         password: string,
         navigate: (path: string) => void
     ) => Promise<void>;
+
+    registerUser: (
+        name: string,
+        email: string,
+        password: string,
+        navigate: (path: string) => void
+    ) => Promise<void>;
+
+    addToPlaylist:(id:string)=>void
+
     logout: () => void;
 }
 
@@ -61,6 +71,33 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
+
+    async function registerUser(
+        name: string,
+        email: string,
+        password: string,
+        navigate: (path: string) => void
+    ) {
+        setBtnLoading(true)
+
+        try {
+            const { data } = await axios.post(`${server}/api/v1/user/register`, {
+                name,
+                email,
+                password,
+            });
+            toast.success(data.message)
+            localStorage.setItem("token", data.token);
+            setUser(data.user)
+            setIsAuth(true)
+            navigate("/");
+        } catch (error: any) {
+            toast.error(error.response?.data?.message || 'خطایی رخ داده است')
+        } finally {
+            setBtnLoading(false);
+        }
+    }
+
     async function fetchUser() {
         try {
             const { data } = await axios.get(`${server}/api/v1/user/me`, {
@@ -79,18 +116,39 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     }
 
-    // داخل Provider (بعد از loginUser)
     const logout = () => {
         localStorage.removeItem("token");
         setUser(null);
         setIsAuth(false);
+
+        toast.success('شما از سایت خارج شدید')
     };
+
+    async function addToPlaylist(id: string) {
+        try {
+            const { data } = await axios.post(
+                `${server}/api/v1/song/${id}`,
+                {},
+                {
+                    headers: {
+                        token: localStorage.getItem("token"),
+                    },
+                }
+            );
+
+            toast.success("آهنگ با موفقیت به لیست پخش اضافه شد.");
+            fetchUser();
+
+        } catch (error: any) {
+            toast.error(error.response?.data?.message || "خطایی رخ داد. لطفاً دوباره تلاش کنید.");
+        }
+    }
 
     useEffect(() => {
         fetchUser()
     }, [])
 
-    return <UserContext.Provider value={{ user, loading, isAuth, btnLoading, loginUser,logout }}>
+    return <UserContext.Provider value={{ user, loading, isAuth, btnLoading, loginUser, logout, registerUser,addToPlaylist }}>
         {children}
 
         <Toaster />
