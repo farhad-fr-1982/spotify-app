@@ -11,12 +11,10 @@ const Player = () => {
     const [progress, setProgress] = useState<number>(0);
     const [duration, setDuration] = useState<number>(0);
 
-    // گرفتن آهنگ
     useEffect(() => {
         fetchSingleSong();
     }, [fetchSingleSong]);
 
-    // کنترل پخش/توقف
     useEffect(() => {
         const audio = audioRef.current;
         if (!audio) return;
@@ -28,7 +26,6 @@ const Player = () => {
         }
     }, [isPlaying]);
 
-    // event listenerها
     useEffect(() => {
         const audio = audioRef.current;
         if (!audio) return;

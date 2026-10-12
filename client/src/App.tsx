@@ -5,6 +5,7 @@ import Loading from "./components/Loading";
 import { useUserData } from "./context/UserContex";
 import Register from "./pages/Register";
 import Albume from "./pages/Albume";
+import PlayList from "./pages/PlayList";
 
 const App = () => {
   const { isAuth, loading } = useUserData()
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/album/:id" element={<Albume />} />
+          <Route path="/playlist" element={isAuth ? <PlayList /> : <Login />} />
           <Route path="/login" element={isAuth ? <Home /> : <Login />} />
           <Route path="/register" element={isAuth ? <Home /> : <Register />} />
         </Routes>
