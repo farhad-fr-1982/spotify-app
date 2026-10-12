@@ -1,9 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import PlayListCard from './PlayListCard'
+import { useUserData } from '../context/UserContex'
 
 const Sidebar = () => {
   const navigate = useNavigate()
+  const { user } = useUserData()
 
   return (
     <div className='w-[25%] h-full p-2 flex-col gap-4 text-white hidden lg:flex'>
@@ -44,6 +46,12 @@ const Sidebar = () => {
             مرور پادکست‌ها
           </button>
         </div>
+
+        {
+          user && user.role === 'admin' && <button className='px-4 py-1.5 bg-white text-black text-[15px] rounded-full mt-4 cursor-pointer' onClick={() => navigate('/admin/dashboard')}>
+            داشبورد ادمین
+          </button>
+        }
       </div>
     </div>
   )

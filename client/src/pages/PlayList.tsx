@@ -14,9 +14,9 @@ const PlayList = () => {
 
   useEffect(() => {
     if (songs && user?.playlist) {
-      const filteredSongs = songs.filter((song) => {
+      const filteredSongs = songs.filter((song) => 
         user.playlist.includes(song.id.toString())
-      })
+      )
       setMyPlayList(filteredSongs)
     }
   }, [songs, user])
@@ -60,7 +60,7 @@ const PlayList = () => {
 
             <hr />
             {
-              songs && songs.map((song, index) => {
+              myPlayList && myPlayList.map((song, index) => {
                 return (
                   <div className="grid grid-cols-3 sm:grid-cols-4 mt-10 mb-4 pl-2 text-[#a7a7a7] hover:bg-[#ffffff2b] cursor-pointer" key={index}>
                     <p className="text-white">
